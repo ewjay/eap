@@ -684,7 +684,14 @@
 
     <section anchor="History" title="Document History">
       <t>[[ To be removed from the final specification ]]</t>
-
+      <t>
+        -01
+        <list style="symbols">
+          <t>
+            Updated references for draft-ietf-tokbind-protocol (-06 to -13 ) and ietf-tokbind-https (-03 to -08).
+          </t>
+        </list>
+      </t>
       <t>
 	-00
 	<list style="symbols">
