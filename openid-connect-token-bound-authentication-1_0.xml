@@ -678,6 +678,16 @@
           <t>
 	    How should we support crypto agility for the hash function?
 	  </t>
+  <t>
+    The document talks about detecting downgrade attacks but there isn't currently
+    sufficient information available to detect a downgrade.
+    Knowing whether the other participants support token binding isn't enough -
+    you'd need to know which key parameters types are supported by each participant.
+    The rp_id_token_token_binding_supported and op_id_token_token_binding_supported
+    metadata values are only true/false and negotiation with the user agent only
+    indicates the one agreed upon key parameters type not the set of key parameters
+    that the user agent can support.
+  </t>
         </list>
       </t>
     </section>
