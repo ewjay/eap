@@ -92,9 +92,9 @@
 	This cryptographically binds the ID Token to the TLS connections
 	over which the authentication occurred.
 	Token Binding is applied to OpenID Connect in the manner described in
-	Section 3 (Federation Use Cases) of 
+	Section 5 (Federation Use Cases) of
 	<xref target="I-D.ietf-tokbind-https">Token Binding over HTTP</xref>.
-	As described in Section 4.4 (Securing Federated Sign-On Protocols) of
+	As described in Section 7.4 (Securing Federated Sign-On Protocols) of
 	<xref target="I-D.ietf-tokbind-https">Token Binding over HTTP</xref>,
 	this use of Token Binding protects the authentication flow
 	from man-in-the-middle and token export and replay attacks.
@@ -137,16 +137,16 @@
 
     <section anchor="Representation" title="OpenID Connect Token Binding Representation">
       <t>
-	Section 3 (Federation Use Cases) of 
+	Section 5 (Federation Use Cases) of
 	<xref target="I-D.ietf-tokbind-https">Token Binding over HTTP</xref>
 	outlines how Token Binding is used with federation protocols in the abstract.
 	This section defines the concrete data structures for using Token Binding
 	with OpenID Connect.
       </t>
       <t>
-	Section 3.2 of
+	Section 5.2 of
 	<xref target="I-D.ietf-tokbind-https">Token Binding over HTTP</xref>
-	suggests placing the public key of the Token Binding
+	suggests placing the Token Binding ID of the Token Binding
 	used to communicate with the Relying Party in the ID Token.
 	A representation of this key is communicated to the OpenID Provider
 	in its Referred Token Binding ID.
@@ -199,7 +199,7 @@
     <section anchor="Actions" title="OpenID Connect Token Binding Actions">
       <t>
 	This specification maps the abstract Token Binding actions specified in
-	Section 3 (Federation Use Cases) of 
+	Section 5 (Federation Use Cases) of
 	<xref target="I-D.ietf-tokbind-https">Token Binding over HTTP</xref>
 	into concrete actions added to the authentication steps specified in
 	Section 3 (Authentication) of
@@ -215,7 +215,7 @@
 	and the Hybrid Flow defined in Section 3.3 of OpenID Connect Core 1.0 when using the
 	<spanx style="verb">code&nbsp;id_token</spanx> or
 	<spanx style="verb">code&nbsp;id_token&nbsp;token</spanx> Response Types --
-	the actions described in Section 3.5 of
+	the actions described in Section 5.5 of
 	<xref target="I-D.ietf-tokbind-https">Token Binding over HTTP</xref>
 	are performed as described.
 	The one difference, as previously described, is that
@@ -325,10 +325,10 @@
     <section anchor="Security" title="Security Considerations">
       <t>
 	OpenID Connect implementations employing Token Binding benefit from the protections
-	described in Section 8 (Security Considerations) of
+	described in Section 7 (Security Considerations) of
 	<xref target="I-D.ietf-tokbind-protocol">The Token Binding Protocol Version 1.0</xref>.
 	Obtaining these protections requires performing the proofs of possession
-	described in Section 4.4 (Securing Federated Sign-On Protocols) of
+	described in Section 7.4 (Securing Federated Sign-On Protocols) of
 	<xref target="I-D.ietf-tokbind-https">Token Binding over HTTP</xref>.
       </t>
       <t>
@@ -446,8 +446,8 @@
       <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7230"?>
       <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7800"?>
 
-      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-tokbind-protocol-06.xml' ?>
-      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-tokbind-https-03.xml' ?>
+      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-tokbind-protocol-13.xml' ?>
+      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-tokbind-https-08.xml' ?>
 
       <reference anchor="OpenID.Core" target="http://openid.net/specs/openid-connect-core-1_0.html">
         <front>
