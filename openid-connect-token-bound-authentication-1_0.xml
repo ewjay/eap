@@ -243,6 +243,10 @@
 	rather than the Token Binding ID
 	used when communicating with the Token Endpoint.
       </t>
+      <t>
+  See <xref target="Examples"/> for examples demonstrating token bound OpenID
+  Connect authentication flows.
+      </t>
     </section>
 
     <section anchor="Phasing" title="Phasing in Token Binding and Preventing Downgrade Attacks">
@@ -582,6 +586,7 @@
     </references>
 
     <references title="Informative References">
+      <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7517"?>
       <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7591"?>
 
       <reference anchor="OAuth.Discovery" target="http://tools.ietf.org/html/draft-ietf-oauth-discovery-02">
@@ -617,7 +622,281 @@
 	<seriesInfo name="Internet-Draft" value="draft-ietf-oauth-discovery-02"/>
       </reference>
 
+      <reference anchor="OAuth.Post" target="http://openid.net/specs/oauth-v2-form-post-response-mode-1_0.html">
+        <front>
+          <title>OAuth 2.0 Form Post Response Mode</title>
+
+          <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
+            <organization abbrev="Microsoft">Microsoft</organization>
+          </author>
+
+          <author fullname="Brian Campbell" initials="B." surname="Campbell">
+            <organization abbrev="Ping Identity">Ping Identity</organization>
+          </author>
+
+          <date day="27" month="April" year="2015" />
+        </front>
+      </reference>
+
     </references>
+    <section anchor="Examples" title="Token Bound Authentication Examples">
+      <t>
+        Examples of token bound OpenID Connect authentication flows are provided in this
+        section.
+        Extra line breaks and whitespace has been added to the example figures for
+        display and formatting purposes.
+      </t>
+      <section anchor="example-id_token-post" title="Example Implicit Flow using Form Post Response Mode">
+
+        <t>
+        The End-User using a User Agent makes an unauthenticated request to the Relying Party.
+        The HTTP request is made over a TLS connection where Token Binding has been negotiated
+        so the <spanx style="verb">Sec-Token-Binding</spanx> header is present in the request,
+        which contains an encoded Token Binding message that has the Token Binding the
+        User Agent uses with the Relying Party.
+      </t>
+
+        <figure title="Unauthenticated Request to Relying Party" anchor="ex-post-a">
+          <artwork><![CDATA[
+ GET / HTTP/1.1
+ Host: rp.example.io
+ Sec-Token-Binding: AIkAAgBBQKzyIrmcY_YCtHVoSHBut69vrGfFdy1_YKTZfFJv
+  6BjrZsKD9b9FRzSBxDs1twTqnAS71M1RBumuihhI9xqxXKkAQIMi9gthwFtmF1lpXi
+  oRsIlQA8vZOKQ0hrJE1_610h0h-IX-O_WllivUBoyLV7ypArE15whKaDrfwsolflmW
+  fPsAAA
+]]></artwork>
+        </figure>
+
+      <t>
+        The Relying Party redirects the user to the OpenID Provider for
+        authentication, which is a normal OpenID Connect Authentication Request
+        asking for an ID Token to be sent using the
+        <xref target="OAuth.Post">Form Post Response Mode</xref>. Note, however,
+        that the response includes the
+        <spanx style="verb">Include-Referred-Token-Binding-ID</spanx>
+        header, which signals to the User Agent that
+        it should reveal the Token Binding ID used on the TLS connection between
+        itself and the Relying Party to the OpenID Provider.
+      </t>
+
+        <figure title="Redirect with Authentication Request" anchor="ex-post-b">
+          <artwork><![CDATA[
+ HTTP/1.1 302 Authenticating
+ Location: https://idp.example.com:443/as/authorization.oauth2?
+  response_type=id_token&
+  response_mode=form_post&
+  client_id=example-client-id&
+  redirect_uri=https%3A%2F%2Frp.example.io%2Fpa%2Foidc%2Fcb&
+  state=eyJ6aXAiOiJERUYiLCJzdWZmaXgiOiJMTFNBOEIiLCJhbGciOiJkaXIiLCJl
+  bmMiOiJBMTI4Q0JDLUhTMjU2Iiwia2lkIjoiMXkifQ..rr-niSUBYsRbXCz6X4JdIw
+  .27rWRLVUJuJsDUAbhWUTAH5xL1tHsV7GLAm91I9gQGTLFe5FfbE_dQ_7ksE8FF8Ej
+  EVk66db-KmQSuzITlLpeg.X8YnveCYW7_-0rZTIuza5A&nonce=i87yhOySCQCGYQw
+  XbFKK7aDhqDIyERH0G2AfDaWSCYg&scope=openid%20profile%20email
+ Content-Length: 0
+ Cache-Control: no-cache, no-store
+ Set-Cookie: nonce.LLSA8B=a70cea0796b148eabfa3fdbb4ea7058d; Path=/;
+  Secure; HttpOnly
+ Include-Referred-Token-Binding-ID: true
+]]></artwork>
+        </figure>
+
+
+      <t>
+        The User Agent follows the redirect and delivers the Authentication Request
+        to the OpenID Provider. The HTTP request is made over a TLS connection where
+        Token Binding has been negotiated so the "Sec-Token-Binding" header is present
+        in the request, which contains an encoded Token Binding message. Because
+        of the <spanx style="verb">Include-Referred-Token-Binding-ID</spanx> header in
+        the response that resulted in this request, the Token Binding message
+        contains two Token Bindings: (1) the provided Token Binding used with the
+        OpenID Provider, and (2) the referred Token Binding used with the Relying
+        Party.
+      </t>
+
+        <figure title="Authentication Request to OpenID Provider" anchor="ex-post-c">
+          <artwork><![CDATA[
+ GET /as/authorization.oauth2?response_type=id_token&
+  response_mode=form_post&client_id=example-client-id&
+  redirect_uri=https%3A%2F%2Frp.example.io%2Fpa%2Foidc%2Fcb&
+  state=eyJ6aXAiOiJERUYiLCJzdWZmaXgiOiJMTFNBOEIiLCJhbGciOiJkaXIiLCJl
+  bmMiOiJBMTI4Q0JDLUhTMjU2Iiwia2lkIjoiMXkifQ..rr-niSUBYsRbXCz6X4JdIw
+  .27rWRLVUJuJsDUAbhWUTAH5xL1tHsV7GLAm91I9gQGTLFe5FfbE_dQ_7ksE8FF8Ej
+  EVk66db-KmQSuzITlLpeg.X8YnveCYW7_-0rZTIuza5A&nonce=i87yhOySCQCGYQw
+  XbFKK7aDhqDIyERH0G2AfDaWSCYg&
+  scope=openid%20profile%20email HTTP/1.1
+ Host: idp.example.com
+ Sec-Token-Binding: ARIAAgBBQCfsI1D1sTq5mvT_2H_dihNIvuHJCHGjHPJchPav
+  NbGrOo26-2JgT_IsbvZd4daDFbirYBIwJ-TK1rh8FzrC-psAQO4Au9xPupLSkhwT9Y
+  n9aSvHXFsMLh4d4cEBKGP1clJtsfUFGDw-8HQSKwgKFN3WfZGq27y8NB3NAM1oNzvq
+  VOIAAAECAEFArPIiuZxj9gK0dWhIcG63r2-sZ8V3LX9gpNl8Um_oGOtmwoP1v0VHNI
+  HEOzW3BOqcBLvUzVEG6a6KGEj3GrFcqQBA9YxqHPBIuDui_aQ1SoRGKyBEhaG2i-Wk
+  e3erRb1YwC7nTgrpqqJG3z1P8bt7cjZN6TpOyktdSSK7OJgiApwG7AAA
+]]></artwork>
+        </figure>
+
+      <t>
+        After the OpenID Provider authenticates the End-User it	issues an
+        Authorization Response using the From Post Response Mode
+        where the parameters are encoded as HTML form values that will be
+        auto-submitted by the User Agent.
+        The OpenID Provider binds the ID Token to the referred Token Binding
+        from the header of the Authentication Request using the token binding hash
+        confirmation method (see the ID Token claims in <xref target="ex-post-f"/>).
+        This binds the ID Token to the TLS connection the
+        User Agent has with the Relying Party.
+      </t>
+
+        <figure title="Authentication Response" anchor="ex-post-d">
+          <artwork><![CDATA[
+ HTTP/1.1 200 OK
+ Cache-Control: no-cache, no-store
+ Content-Type: text/html;charset=utf-8
+ Content-Length: 1223
+
+ <html>
+ <head><title>Submit This Form</title></head>
+ <body onload="javascript:document.forms[0].submit()">
+ <form method="post" action="https://rp.example.io/pa/oidc/cb">
+  <input type="hidden" name="id_token" value="eyJhbGciOiJFUzUxMiIsIm
+    tpZCI6Ik5oNWdtTTBYR3QyY0UzcHhfUGZwOEIifQ.eyJzdWIiOiI0X2x0YzFBQ0M
+    yZXNjM0JXQzQtIiwibmFtZSI6IkJyaWFuIENhbXBiZWxsIiwiZW1haWwiOiJicml
+    hbkBleGFtcGxlLmNvbSIsImF1ZCI6ImV4YW1wbGUtY2xpZW50LWlkIiwianRpIjo
+    iZlJEWTBwZmcyVU9Lc0E1UXRNMnNEVSIsImlzcyI6Imh0dHBzOlwvXC9pZHAuZXh
+    hbXBsZS5jb20iLCJpYXQiOjE0OTI3MjgyNjAsImV4cCI6MTQ5MjcyODMyMCwibm9
+    uY2UiOiJpODd5aE95U0NRQ0dZUXdYYkZLSzdhRGhxREl5RVJIMEcyQWZEYVdTQ1l
+    nIiwiYXV0aF90aW1lIjoxNDkyNzIzMTYxLCJjbmYiOnsidGJoIjoic3VNdXhoX0l
+    sclAtWnJqMzNMdVFPUTVyWDAzOWNtQmUtd3QyZGYzQnJVUSJ9fQ.AcVnr9j52J16
+    w--ijQKlgOABfijr8oQ17nUsAMAFjRgdODWI9lb4n527yQSZtSGlO4xKS_Vpo1g2
+    HUacA77Wbp7AABnPBu5rkWSPYCOSgonoISQGohSKOj6uSETElNJQeAG6g2JU4lBN
+    TwX1RPyOSnUXQ2YGQA4WiH0KnEd79P8r3CC0"/>
+  <input type="hidden" name="state" value="eyJ6aXAiOiJERUYiLCJzdWZma
+   XgiOiJMTFNBOEIiLCJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2Iiwia2
+   lkIjoiMXkifQ..rr-niSUBYsRbXCz6X4JdIw.27rWRLVUJuJsDUAbhWUTAH5xL1tH
+   sV7GLAm91I9gQGTLFe5FfbE_dQ_7ksE8FF8EjEVk66db-KmQSuzITlLpeg.X8Ynve
+   CYW7_-0rZTIuza5A"/>
+ </form>
+ </body>
+ </html>
+]]></artwork>
+        </figure>
+
+      <t>
+        The Authorization Response is transmitted via the HTTP POST
+        method to the Relying Party with the parameters being
+        <spanx style="verb">application/x-www-form-urlencoded</spanx>
+        encoded in the body.
+        The "Sec-Token-Binding" header in the request has an encoded
+        Token Binding message, which contains the Token Binding
+        the User Agent uses with the Relying Party.
+      </t>
+
+        <figure title="Authentication Response posted to the Relying Party" anchor="ex-post-e">
+          <artwork><![CDATA[
+ POST /pa/oidc/cb HTTP/1.1
+ Host: rp.example.io
+ Content-Length: 952
+ Content-Type: application/x-www-form-urlencoded
+ Cookie: nonce.LLSA8B=a70cea07-96b1-48ea-bfa3-fdbb4ea7058d
+ Sec-Token-Binding: AIkAAgBBQKzyIrmcY_YCtHVoSHBut69vrGfFdy1_YKTZfFJv
+  6BjrZsKD9b9FRzSBxDs1twTqnAS71M1RBumuihhI9xqxXKkAQIMi9gthwFtmF1lpXi
+  oRsIlQA8vZOKQ0hrJE1_610h0h-IX-O_WllivUBoyLV7ypArE15whKaDrfwsolflmW
+  fPsAAA
+
+ id_token=eyJhbGciOiJFUzUxMiIsImtpZCI6Ik5oNWdtTTBYR3QyY0UzcHhfUGZwOE
+  IifQ.eyJzdWIiOiI0X2x0YzFBQ0MyZXNjM0JXQzQtIiwibmFtZSI6IkJyaWFuIENhb
+  XBiZWxsIiwiZW1haWwiOiJicmlhbkBleGFtcGxlLmNvbSIsImF1ZCI6ImV4YW1wbGU
+  tY2xpZW50LWlkIiwianRpIjoiZlJEWTBwZmcyVU9Lc0E1UXRNMnNEVSIsImlzcyI6I
+  mh0dHBzOlwvXC9pZHAuZXhhbXBsZS5jb20iLCJpYXQiOjE0OTI3MjgyNjAsImV4cCI
+  6MTQ5MjcyODMyMCwibm9uY2UiOiJpODd5aE95U0NRQ0dZUXdYYkZLSzdhRGhxREl5R
+  VJIMEcyQWZEYVdTQ1lnIiwiYXV0aF90aW1lIjoxNDkyNzIzMTYxLCJjbmYiOnsidGJ
+  oIjoic3VNdXhoX0lsclAtWnJqMzNMdVFPUTVyWDAzOWNtQmUtd3QyZGYzQnJVUSJ9f
+  Q.AcVnr9j52J16w--ijQKlgOABfijr8oQ17nUsAMAFjRgdODWI9lb4n527yQSZtSGl
+  O4xKS_Vpo1g2HUacA77Wbp7AABnPBu5rkWSPYCOSgonoISQGohSKOj6uSETElNJQeA
+  G6g2JU4lBNTwX1RPyOSnUXQ2YGQA4WiH0KnEd79P8r3CC0&
+ state=eyJ6aXAiOiJERUYiLCJzdWZmaXgiOiJMTFNBOEIiLCJhbGciOiJkaXIiLCJlb
+ mMiOiJBMTI4Q0JDLUhTMjU2Iiwia2lkIjoiMXkifQ..rr-niSUBYsRbXCz6X4JdIw.2
+ 7rWRLVUJuJsDUAbhWUTAH5xL1tHsV7GLAm91I9gQGTLFe5FfbE_dQ_7ksE8FF8EjEVk
+ 66db-KmQSuzITlLpeg.X8YnveCYW7_-0rZTIuza5A
+]]></artwork>
+        </figure>
+
+    <t>
+      The Relying Party validates the ID Token, the claims of which are
+      shown in <xref target="ex-post-f"/>, as normal but also
+      checks that the provided Token Binding ID from the
+      <spanx style="verb">Sec-Token-Binding</spanx> header matches
+      the Token Binding ID referenced by the <spanx style="verb">tbh</spanx>
+      member of the <spanx style="verb">cnf</spanx> claim.
+    </t>
+
+        <figure title="JWT Claims in the ID Token" anchor="ex-post-f">
+          <artwork><![CDATA[
+ {
+  "sub": "4_ltc1ACC2esc3BWC4-",
+  "name": "Brian Campbell",
+  "email": "brian@example.com",
+  "aud": "example-client-id",
+  "jti": "fRDY0pfg2UOKsA5QtM2sDU",
+  "iss": "https://idp.example.com",
+  "iat": 1492728260,
+  "exp": 1492728320,
+  "nonce": "i87yhOySCQCGYQwXbFKK7aDhqDIyERH0G2AfDaWSCYg",
+  "auth_time": 1492723161,
+  "cnf": {
+   "tbh": "suMuxh_IlrP-Zrj33LuQOQ5rX039cmBe-wt2df3BrUQ"
+  }
+ }
+]]></artwork>
+        </figure>
+
+    <t>
+      The base64url-encoded
+      representation of the exported keying material (EKM), which can
+      be used to validate the Token Binding Message, from the TLS
+      connection between the User Agent and the Relying Party is shown
+      in <xref target="ex-rp-ekm"/> while the EKM from the TLS
+      connection between the User Agent and the OpenID Provider is
+      shown in <xref target="ex-idp-ekm"/>.
+    </t>
+
+        <figure title="EKM from TLS connection with Relying Party" anchor="ex-rp-ekm">
+          <artwork><![CDATA[
+ 1mOiLC0IFA5SMBQQVvd48VSKNuF89USGw2_UBbWik34
+]]></artwork>
+        </figure>
+        <figure title="EKM from TLS connection with OpenID Provider" anchor="ex-idp-ekm">
+          <artwork><![CDATA[
+ r4FNRMOUG_0gQQKyDGwEiCE6v8lmpsV99GZddteFIYQ
+]]></artwork>
+        </figure>
+
+    <t>
+      The public key corresponding to the private key that
+      signed the ID Token, which can be used to verify the signature on the ID Token,
+      is represented as a <xref target="RFC7517">JSON Web Key</xref>
+      in <xref target="ex-jwk"/>.
+    </t>
+
+        <figure title="JSON Web Key" anchor="ex-jwk">
+          <artwork><![CDATA[
+ {
+  "kty":"EC",
+  "kid":"Nh5gmM0XGt2cE3px_Pfp8B",
+  "use":"sig",
+  "x":"AWlGZ4vb50cAxuGKJvHoUTVKIREeMsk6MycRslLoWzX_fV_XlWX3zEu5Ujhwo
+    2YF9RVELulHAYSqxgwW3503WC76",
+  "y":"Abtom9zO4sCP9T-6W8C847j7Qbif5_ZiHwQcccwZBuK60rl15pbn1NNtkLTgK
+    YFd6tc6Wuo1IIvFjHE6YPp1ZtSc",
+  "crv":"P-521"
+ }
+]]></artwork>
+        </figure>
+
+
+      </section>
+
+    </section>
+
 
     <section anchor="Acknowledgements" title="Acknowledgements">
       <t>
@@ -698,7 +977,11 @@
         -01
         <list style="symbols">
           <t>
-            Updated references for draft-ietf-tokbind-protocol (-06 to -13 ) and ietf-tokbind-https (-03 to -08).
+            Add examples of token bound authentication flows.
+          </t>
+          <t>
+            Updated references for draft-ietf-tokbind-protocol (from -06 to -13 )
+            and ietf-tokbind-https (from -03 to -08).
           </t>
         </list>
       </t>
