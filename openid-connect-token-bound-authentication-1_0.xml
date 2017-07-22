@@ -473,8 +473,8 @@
       <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7230"?>
       <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7800"?>
 
-      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-tokbind-protocol-14.xml' ?>
-      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-tokbind-https-09.xml' ?>
+      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-tokbind-protocol-15.xml' ?>
+      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-tokbind-https-10.xml' ?>
 
       <reference anchor="OpenID.Core" target="http://openid.net/specs/openid-connect-core-1_0.html">
         <front>
@@ -1318,6 +1318,10 @@
     Add text suggesting a new cnf member be defined in the future, if hash
     function(s) other than SHA-256 need to be used for the token binding hash
   </t>
+  <t>
+    Updated references for draft-ietf-tokbind-protocol (from -14 to -15) and
+    draft-ietf-tokbind-https (from -09 to -10).
+  </t>
         </list>
       </t>
       <t>
@@ -1333,7 +1337,7 @@
 	  </t>
           <t>
             Updated references for draft-ietf-tokbind-protocol (from -06 to -14),
-            ietf-tokbind-https (from -03 to -09), and
+            draft-ietf-tokbind-https (from -03 to -09), and
 	    draft-ietf-oauth-discovery (from -02 to -06).
           </t>
         </list>
