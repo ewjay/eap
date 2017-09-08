@@ -263,7 +263,7 @@
       </t>
     </section>
 
-    <section anchor="Phasing" title="Phasing in Token Binding and Preventing Downgrade Attacks">
+    <section anchor="Phasing" title="Phasing in Token Binding">
       <t>
 	Many OpenID Connect implementations will be deployed in situations in which
 	not all participants support Token Binding.
@@ -274,7 +274,7 @@
       <t>
 	It is a context-dependent deployment choice whether to allow
 	authentications to proceed in which Token Binding is not supported
-	or whether to treat Token Binding failures at any step as fatal errors.
+	or whether to treat the omission of Token Binding at any step as a fatal error.
 	In dynamic deployment environments in which End Users have choices
 	of Relying Parties, the OpenID Providers, and/or User Agents,
 	it is RECOMMENDED that authentications using one or more components
@@ -286,19 +286,24 @@
 	any Token Binding key mismatches MUST be treated as fatal errors.
       </t>
       <t>
-	If all the participants in an OpenID Connect authentication
-	support Token Binding and yet one or more of them does not use it,
-	this is likely evidence of a downgrade attack.
-	In this case, the authentication SHOULD be aborted with an error.
+	In more controlled deployment environments where all the
+	participants in an OpenID Connect authentication
+	flow are known or expected to support Token
+	Binding and yet one or more of them does not use it, the
+	authentication SHOULD be aborted with an error.
 	For instance, if the RP knows that the OP and the User Agent both
 	support Token Binding and yet the ID Token received does not contain
-	Token Binding information, this is almost certainly a sign of an attack.
+	Token Binding information, the ID Token should be rejected.
       </t>
       <t>
 	The OP and RP can determine whether the other supports Token Binding
 	using the metadata values defined in the next section.
 	They can determine whether the User Agent supports Token Binding
 	by whether it negotiated Token Binding for the TLS connection.
+	However, due to the possibility of mismatched support of Token Binding
+	key parameters across participants, there are potential cases
+	where all participant support Token Binding yet Token Binding information
+	is missing from a step in the authentication flow.
       </t>
     </section>
 
@@ -350,12 +355,14 @@
 	<xref target="I-D.ietf-tokbind-https">Token Binding over HTTP</xref>.
       </t>
       <t>
-	It is largely the RP's responsibility to detect attempted man-in-the-middle attacks.
-	This is possible after the RP first determines that all parties support Token Binding.
-	When all parties support Token Binding and there is either a Token Binding mismatch
-	or if Token Binding information should be present but is missing,
-	either in the TLS information or in the ID Token,
-	then the RP SHOULD reject the authentication.
+       Because of the possibility of mismatched Token Binding key parameters type support
+       across the OP, RP, and User Agent, an indeterminate state can occur when the RP has
+       negotiated token binding and sends a referred Token Binging to an OP that supports
+       Token Binging but receives an unbound ID token. How to handle such a situation is
+       ultimately at the discretion of the RP, however,
+       <xref target="I-D.ietf-tokbind-https">Token Binding over HTTP</xref> recommends that
+       providers support all the Token Binding key parameters so the situation should be
+       uncommon and it is RECOMMENDED that an RP treat that indeterminate state as a fatal error.
       </t>
       <t>
 	ID Tokens are not the only security tokens used by OpenID Connect that can be token bound.
@@ -1292,22 +1299,14 @@
       specification.</t>
     </section>
 
-    <section anchor="TBD" title="Open Issues">
-      <t>
-	<list style="symbols">
-  <t>
-    The document talks about detecting downgrade attacks but there isn't currently
-    sufficient information available to detect a downgrade.
-    Knowing whether the other participants support token binding isn't enough -
-    you'd need to know which key parameters types are supported by each participant.
-    The rp_id_token_token_binding_supported and op_id_token_token_binding_supported
-    metadata values are only true/false and negotiation with the user agent only
-    indicates the one agreed upon key parameters type not the set of key parameters
-    that the user agent can support.
-  </t>
-        </list>
-      </t>
-    </section>
+    <!--<section anchor="TBD" title="Open Issues">-->
+      <!--<t>-->
+	<!--<list style="symbols">-->
+  <!--<t>-->
+  <!--</t>-->
+        <!--</list>-->
+      <!--</t>-->
+    <!--</section>-->
 
     <section anchor="History" title="Document History">
       <t>[[ To be removed from the final specification ]]</t>
@@ -1317,6 +1316,12 @@
   <t>
     Add text suggesting a new cnf member be defined in the future, if hash
     function(s) other than SHA-256 need to be used for the token binding hash
+    as discussed http://lists.openid.net/pipermail/openid-specs-eap/Week-of-Mon-20170717/000042.html
+  </t>
+  <t>
+    Adjust the language around aborting authentication in Phasing in Token Binding
+    and the RP detecting attacks in Security Considerations to be somewhat more general
+    as discussed http://lists.openid.net/pipermail/openid-specs-eap/Week-of-Mon-20170717/000042.html
   </t>
   <t>
     Updated references for draft-ietf-tokbind-protocol (from -14 to -15),
