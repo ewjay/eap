@@ -481,7 +481,7 @@
       <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7230"?>
       <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7800"?>
 
-      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-tokbind-protocol-15.xml' ?>
+      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-tokbind-protocol-16.xml' ?>
       <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-tokbind-https-10.xml' ?>
 
       <reference anchor="OpenID.Core" target="http://openid.net/specs/openid-connect-core-1_0.html">
@@ -1325,7 +1325,7 @@
     as discussed http://lists.openid.net/pipermail/openid-specs-eap/Week-of-Mon-20170717/000042.html
   </t>
   <t>
-    Updated references for draft-ietf-tokbind-protocol (from -14 to -15),
+    Updated references for draft-ietf-tokbind-protocol (from -14 to -16),
     draft-ietf-tokbind-https (from -09 to -10), draft-ietf-oauth-token-binding (from -03 to -04),
     and draft-ietf-oauth-discovery (from -06 to -07)
   </t>
