@@ -277,7 +277,8 @@
 	or whether to treat the omission of Token Binding at any step as a fatal error.
 	In dynamic deployment environments in which End Users have choices
 	of Relying Parties, the OpenID Providers, and/or User Agents,
-	it is RECOMMENDED that authentications using one or more components
+	it is recommended that, for some reasonable period of time during which
+	Token Binding technology is being adopted, authentications using one or more components
 	that do not implement Token Binding be allowed to successfully proceed.
 	This enables different components to be upgraded to supporting Token Binding
 	at different times, providing a smooth transition path for
