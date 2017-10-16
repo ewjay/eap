@@ -34,7 +34,7 @@
     </author>
 
     <author fullname="John Bradley" initials="J." surname="Bradley">
-      <organization>Ping Identity</organization>
+      <organization>Yubico</organization>
       <address>
 	<email>ve7jtb@ve7jtb.com</email>
 	<uri>http://www.thread-safe.com/</uri>
@@ -669,7 +669,7 @@
         </front>
       </reference>
 
-      <reference anchor="OAuth.TokenBinding" target="https://tools.ietf.org/html/draft-ietf-oauth-token-binding-04">
+      <reference anchor="OAuth.TokenBinding" target="https://tools.ietf.org/html/draft-ietf-oauth-token-binding-05">
 	<front>
 	  <title abbrev="OAuth 2.0 Token Binding">OAuth 2.0 Token Binding</title>
 
@@ -681,19 +681,19 @@
 	    </address>
 	  </author>
 
+    <author fullname="Brian Campbell" initials="B." surname="Campbell">
+      <organization>Ping Identity</organization>
+      <address>
+        <email>brian.d.campbell@gmail.com</email>
+        <uri>https://twitter.com/__b_c</uri>
+      </address>
+    </author>
+
 	  <author fullname="John Bradley" initials="J." surname="Bradley">
-	    <organization abbrev="Ping Identity">Ping Identity</organization>
+	    <organization>Yubico</organization>
 	    <address>
 	      <email>ve7jtb@ve7jtb.com</email>
 	      <uri>http://www.thread-safe.com/</uri>
-	    </address>
-	  </author>
-
-	  <author fullname="Brian Campbell" initials="B." surname="Campbell">
-	    <organization>Ping Identity</organization>
-	    <address>
-	      <email>brian.d.campbell@gmail.com</email>
-	      <uri>https://twitter.com/__b_c</uri>
 	    </address>
 	  </author>
 
@@ -714,7 +714,7 @@
 
 	  <date day="27" month="March" year="2017" />
 	</front>
-	<seriesInfo name="Internet-Draft" value="draft-ietf-oauth-token-binding-04"/>
+	<seriesInfo name="Internet-Draft" value="draft-ietf-oauth-token-binding-05"/>
       </reference>
 
     </references>
@@ -1326,7 +1326,7 @@
   </t>
   <t>
     Updated references for draft-ietf-tokbind-protocol (from -14 to -16),
-    draft-ietf-tokbind-https (from -09 to -10), draft-ietf-oauth-token-binding (from -03 to -04),
+    draft-ietf-tokbind-https (from -09 to -10), draft-ietf-oauth-token-binding (from -03 to -05),
     and draft-ietf-oauth-discovery (from -06 to -07)
   </t>
         </list>
