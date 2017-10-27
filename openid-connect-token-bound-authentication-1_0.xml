@@ -22,7 +22,7 @@
   <?rfc private="Draft" ?>
 
   <front>
-    <title abbrev="OpenID Connect Token Bound Authentication 1.0">OpenID Connect
+    <title abbrev="OpenID Connect Token Bound Authentication">OpenID Connect
     Token Bound Authentication 1.0 - draft 02</title>
 
     <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
@@ -712,7 +712,7 @@
 	    </address>
 	  </author>
 
-	  <date day="27" month="March" year="2017" />
+	  <date day="26" month="October" year="2017" />
 	</front>
 	<seriesInfo name="Internet-Draft" value="draft-ietf-oauth-token-binding-05"/>
       </reference>
