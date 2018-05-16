@@ -313,15 +313,19 @@
 	<t>
 	  Relying Parties supporting Token Binding that also support
 	  <xref target="OpenID.Registration">OpenID Connect Dynamic Client Registration 1.0</xref>
-	  use this metadata value to register their support for Token Binding:
+	  use this metadata parameter to register their support for Token Binding and indicate
+	  the expected JWT Confirmation Method member name used to bind the ID Token:
 	</t>
 	<t>
 	  <list style="hanging">
-	    <t hangText="rp_id_token_token_binding_supported">
+	    <t hangText="id_token_token_binding_cnf">
 	      <vspace/>
 	      OPTIONAL.
-	      Boolean value specifying whether the Relying Party supports Token Binding of ID Tokens.
-	      If omitted, the default value is <spanx style="verb">false</spanx>.
+	      String value specifying the JWT Confirmation Method member name
+	      (e.g. <spanx style="verb">tbh</spanx>) that the Relying Party expects when
+	      receiving Token Bound ID Tokens. The presence of this parameter indicates that
+	      the Relying Party supports Token Binding of ID Tokens. If omitted,
+	      the default is that the Relying Party does not support Token Binding of ID Tokens.
 	    </t>
 	  </list>
 	</t>
@@ -331,15 +335,19 @@
 	<t>
 	  OpenID Providers supporting Token Binding that also support
 	  <xref target="OpenID.Discovery">OpenID Connect Discovery 1.0</xref>
-	  use this metadata value to register their support for Token Binding:
+	  use this metadata parameter to indicate their support for Token Binding and
+	  specify the JWT Confirmation Methods they support for binding the ID Token.
 	</t>
 	<t>
 	  <list style="hanging">
-	    <t hangText="op_id_token_token_binding_supported">
+	    <t hangText="id_token_token_binding_cnf_values_supported">
 	      <vspace/>
 	      OPTIONAL.
-	      Boolean value specifying whether the OpenID Provider supports Token Binding of ID Tokens.
-	      If omitted, the default value is <spanx style="verb">false</spanx>.
+	      JSON array containing a list of the JWT Confirmation Method member names
+	      supported by the OP for Token Binding of ID Tokens. The presence of this parameter
+	      indicates that the OpenID Provider supports Token Binding of ID Tokens.
+	      If omitted, the default is that the OpenID Provider does not support Token
+	      Binding of ID Tokens.
 	    </t>
 	  </list>
 	</t>
@@ -420,11 +428,12 @@
 	  <t> <?rfc subcompact="yes"?>
 	    <list style="symbols">
 	      <t>
-		Client Metadata Name: <spanx style="verb">rp_id_token_token_binding_supported</spanx>
+		Client Metadata Name: <spanx style="verb">id_token_token_binding_cnf</spanx>
 	      </t>
 	      <t>
 		Client Metadata Description:
-		Boolean value specifying whether the Relying Party supports Token Binding of ID Tokens
+		String value specifying the JWT Confirmation Method member name
+		the Relying Party expects when receiving Token Bound ID Tokens
 	      </t>
 	      <t>
 		Change Controller: OpenID Foundation Extended Authentication Profile (EAP) Working Group
@@ -451,11 +460,12 @@
 	  <t> <?rfc subcompact="yes"?>
 	    <list style="symbols">
 	      <t>
-		Metadata Name: <spanx style="verb">op_id_token_token_binding_supported</spanx>
+		Metadata Name: <spanx style="verb">id_token_token_binding_cnf_values_supported</spanx>
 	      </t>
 	      <t>
 		Metadata Description:
-		Boolean value specifying whether the OpenID Provider supports Token Binding of ID Tokens
+		JSON array listing the JWT Confirmation Method member names
+		supported by the OP for Token Binding of ID Tokens
 	      </t>
 	      <t>
 		Change Controller: OpenID Foundation Extended Authentication Profile (EAP) Working Group
@@ -1314,6 +1324,10 @@
       <t>
 	    -03
 	    <list style="symbols">
+<t> 
+	Adjust the metadata to indicate supported confirmation method hash algorithms
+	for Token Binding of ID Tokens
+</t>
 <t>
 	Updated references for draft-ietf-tokbind-protocol to -18,
 	draft-ietf-tokbind-https to -15, draft-ietf-oauth-token-binding to -06,
