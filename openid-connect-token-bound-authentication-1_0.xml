@@ -23,7 +23,7 @@
 
   <front>
     <title abbrev="OpenID Connect Token Bound Authentication">OpenID Connect
-    Token Bound Authentication 1.0 - draft 02</title>
+    Token Bound Authentication 1.0 - draft 03</title>
 
     <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
       <organization abbrev="Microsoft">Microsoft</organization>
@@ -487,8 +487,8 @@
       <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7230"?>
       <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7800"?>
 
-      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-tokbind-protocol-16.xml' ?>
-      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-tokbind-https-10.xml' ?>
+      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-tokbind-protocol-18.xml' ?>
+      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-tokbind-https-15.xml' ?>
 
       <reference anchor="OpenID.Core" target="http://openid.net/specs/openid-connect-core-1_0.html">
         <front>
@@ -626,7 +626,7 @@
       <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7517"?>
       <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7591"?>
 
-      <reference anchor="OAuth.AuthorizationMetadata" target="http://tools.ietf.org/html/draft-ietf-oauth-discovery-07">
+      <reference anchor="OAuth.AuthorizationMetadata" target="http://tools.ietf.org/html/draft-ietf-oauth-discovery-10">
         <front>
 	  <title abbrev="OAuth 2.0 Authorization Server Metadata">OAuth 2.0 Authorization Server Metadata</title>
 
@@ -656,7 +656,7 @@
 
 	  <date day="10" month="March" year="2017" />
         </front>
-	<seriesInfo name="Internet-Draft" value="draft-ietf-oauth-discovery-07"/>
+	<seriesInfo name="Internet-Draft" value="draft-ietf-oauth-discovery-10"/>
       </reference>
 
       <reference anchor="OAuth.Post" target="http://openid.net/specs/oauth-v2-form-post-response-mode-1_0.html">
@@ -720,7 +720,7 @@
 
 	  <date day="26" month="October" year="2017" />
 	</front>
-	<seriesInfo name="Internet-Draft" value="draft-ietf-oauth-token-binding-05"/>
+	<seriesInfo name="Internet-Draft" value="draft-ietf-oauth-token-binding-06"/>
       </reference>
 
     </references>
@@ -1317,6 +1317,16 @@
 
     <section anchor="History" title="Document History">
       <t>[[ To be removed from the final specification ]]</t>
+      <t>
+	    -03
+	    <list style="symbols">
+<t>
+	Updated references for draft-ietf-tokbind-protocol to -18,
+	draft-ietf-tokbind-https to -15, draft-ietf-oauth-token-binding to -06,
+	and draft-ietf-oauth-discovery to -10
+</t>
+	    </list>
+      </t>
       <t>
         -02
         <list style="symbols">
