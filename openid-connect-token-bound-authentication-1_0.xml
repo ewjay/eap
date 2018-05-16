@@ -1325,6 +1325,10 @@
 	draft-ietf-tokbind-https to -15, draft-ietf-oauth-token-binding to -06,
 	and draft-ietf-oauth-discovery to -10
 </t>
+<t>
+	Explicitly state that the base64url encoding of the tbh value doesn't include
+	any trailing pad characters, line breaks, whitespace, etc.
+</t>
 	    </list>
       </t>
       <t>
