@@ -497,8 +497,8 @@
       <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7230"?>
       <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7800"?>
 
-      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-tokbind-protocol-18.xml' ?>
-      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-tokbind-https-15.xml' ?>
+      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-tokbind-protocol-19.xml' ?>
+      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-tokbind-https-17.xml' ?>
 
       <reference anchor="OpenID.Core" target="http://openid.net/specs/openid-connect-core-1_0.html">
         <front>
@@ -685,7 +685,7 @@
         </front>
       </reference>
 
-      <reference anchor="OAuth.TokenBinding" target="https://tools.ietf.org/html/draft-ietf-oauth-token-binding-05">
+      <reference anchor="OAuth.TokenBinding" target="https://tools.ietf.org/html/draft-ietf-oauth-token-binding-07">
 	<front>
 	  <title abbrev="OAuth 2.0 Token Binding">OAuth 2.0 Token Binding</title>
 
@@ -730,7 +730,7 @@
 
 	  <date day="26" month="October" year="2017" />
 	</front>
-	<seriesInfo name="Internet-Draft" value="draft-ietf-oauth-token-binding-06"/>
+	<seriesInfo name="Internet-Draft" value="draft-ietf-oauth-token-binding-07"/>
       </reference>
 
     </references>
@@ -1335,8 +1335,8 @@
 	for Token Binding of ID Tokens
 </t>
 <t>
-	Updated references for draft-ietf-tokbind-protocol to -18,
-	draft-ietf-tokbind-https to -15, draft-ietf-oauth-token-binding to -06,
+	Updated references for draft-ietf-tokbind-protocol to -19,
+	draft-ietf-tokbind-https to -17, draft-ietf-oauth-token-binding to -07,
 	and draft-ietf-oauth-discovery to -10
 </t>
 <t>
