@@ -171,7 +171,12 @@
 	in an ID Token.
 	The value of the <spanx style="verb">tbh</spanx> member is the
 	base64url encoding of the SHA-256 hash of the Token Binding ID.
-      </t>
+	Base64url encoding is base64 encoding using the URL and filename safe alphabet
+	defined in Section 5 of <xref target="RFC4648">RFC 4648</xref>, with all trailing '='
+	characters omitted and without the
+	inclusion of any line breaks, whitespace, or other additional
+	characters.
+	  </t>
       <t>
 	The following example demonstrates the JWT Claims Set of an ID Token
 	containing the base64url encoding of the SHA-256 hash of a Token Binding ID
@@ -487,6 +492,7 @@
   <back>
     <references title="Normative References">
       <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.2119"?>
+      <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.4648"?>
       <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6749"?>
       <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7230"?>
       <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7800"?>
@@ -1332,6 +1338,10 @@
 	Updated references for draft-ietf-tokbind-protocol to -18,
 	draft-ietf-tokbind-https to -15, draft-ietf-oauth-token-binding to -06,
 	and draft-ietf-oauth-discovery to -10
+</t>
+<t>
+	Explicitly state that the base64url encoding of the tbh value doesn't include
+	any trailing pad characters, line breaks, whitespace, etc.
 </t>
 	    </list>
       </t>
