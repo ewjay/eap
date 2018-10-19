@@ -49,7 +49,7 @@
       </address>
     </author>
 
-    <date day="1" month="July" year="2018" />
+    <date day="19" month="October" year="2018" />
 
     <workgroup>OpenID Extended Authentication Profile (EAP) Working Group</workgroup>
 
@@ -85,17 +85,17 @@
       <t>
 	This specification enables OpenID Connect implementations to apply
 	Token Binding
-	<xref target="I-D.ietf-tokbind-protocol">The Token Binding Protocol Version 1.0</xref>
-	<xref target="I-D.ietf-tokbind-https">Token Binding over HTTP</xref>
+	<xref target="RFC8471">The Token Binding Protocol Version 1.0</xref>
+	<xref target="RFC8473">Token Binding over HTTP</xref>
 	to the OpenID Connect ID Token
 	defined by <xref target="OpenID.Core">OpenID Connect Core 1.0</xref>.
 	This cryptographically binds the ID Token to the TLS connections
 	over which the authentication occurred.
 	Token Binding is applied to OpenID Connect in the manner described in
 	Section 5 (Federation Use Cases) of
-	<xref target="I-D.ietf-tokbind-https">Token Binding over HTTP</xref>.
+	<xref target="RFC8473">Token Binding over HTTP</xref>.
 	As described in Section 7.4 (Securing Federated Sign-On Protocols) of
-	<xref target="I-D.ietf-tokbind-https">Token Binding over HTTP</xref>,
+	<xref target="RFC8473">Token Binding over HTTP</xref>,
 	this use of Token Binding protects the authentication flow
 	from man-in-the-middle and token export and replay attacks.
       </t>
@@ -128,7 +128,7 @@
 	  defined by <xref target="JWT">JSON Web Token (JWT)</xref>,
 	  the term "User Agent" defined by <xref target="RFC7230">RFC 7230</xref>,
 	  the terms "Provided", "Referred", "Token Binding" and "Token Binding ID"
-	  defined by <xref target="I-D.ietf-tokbind-https">Token Binding over HTTP</xref>,
+	  defined by <xref target="RFC8473">Token Binding over HTTP</xref>,
 	  and the terms defined by
 	  <xref target="OpenID.Core">OpenID Connect Core 1.0</xref>.
 	</t>
@@ -138,14 +138,14 @@
     <section anchor="Representation" title="OpenID Connect Token Binding Representation">
       <t>
 	Section 5 (Federation Use Cases) of
-	<xref target="I-D.ietf-tokbind-https">Token Binding over HTTP</xref>
+	<xref target="RFC8473">Token Binding over HTTP</xref>
 	outlines how Token Binding is used with federation protocols in the abstract.
 	This section defines the concrete data structures for using Token Binding
 	with OpenID Connect.
       </t>
       <t>
 	Section 5.2 of
-	<xref target="I-D.ietf-tokbind-https">Token Binding over HTTP</xref>
+	<xref target="RFC8473">Token Binding over HTTP</xref>
 	suggests placing the Token Binding ID of the Token Binding
 	used to communicate with the Relying Party in the ID Token.
 	A representation of this key is communicated to the OpenID Provider
@@ -219,7 +219,7 @@
       <t>
 	This specification maps the abstract Token Binding actions specified in
 	Section 5 (Federation Use Cases) of
-	<xref target="I-D.ietf-tokbind-https">Token Binding over HTTP</xref>
+	<xref target="RFC8473">Token Binding over HTTP</xref>
 	into concrete actions added to the authentication steps specified in
 	Section 3 (Authentication) of
 	<xref target="OpenID.Core">OpenID Connect Core 1.0</xref>.
@@ -235,7 +235,7 @@
 	<spanx style="verb">code&nbsp;id_token</spanx> or
 	<spanx style="verb">code&nbsp;id_token&nbsp;token</spanx> Response Types --
 	the actions described in Section 5.5 of
-	<xref target="I-D.ietf-tokbind-https">Token Binding over HTTP</xref>
+	<xref target="RFC8473">Token Binding over HTTP</xref>
 	are performed as described.
 	The one difference, as previously described, is that
 	a cryptographic hash
@@ -363,10 +363,10 @@
       <t>
 	OpenID Connect implementations employing Token Binding benefit from the protections
 	described in Section 7 (Security Considerations) of
-	<xref target="I-D.ietf-tokbind-protocol">The Token Binding Protocol Version 1.0</xref>.
+	<xref target="RFC8471">The Token Binding Protocol Version 1.0</xref>.
 	Obtaining these protections requires performing the proofs of possession
 	described in Section 7.4 (Securing Federated Sign-On Protocols) of
-	<xref target="I-D.ietf-tokbind-https">Token Binding over HTTP</xref>.
+	<xref target="RFC8473">Token Binding over HTTP</xref>.
       </t>
       <t>
        Because of the possibility of mismatched Token Binding key parameters type support
@@ -374,14 +374,14 @@
        negotiated token binding and sends a referred Token Binging to an OP that supports
        Token Binging but receives an unbound ID token. How to handle such a situation is
        ultimately at the discretion of the RP, however,
-       <xref target="I-D.ietf-tokbind-https">Token Binding over HTTP</xref> recommends that
+       <xref target="RFC8473">Token Binding over HTTP</xref> recommends that
        providers support all the Token Binding key parameters so the situation should be
        uncommon and it is RECOMMENDED that an RP treat that indeterminate state as a fatal error.
       </t>
       <t>
 	ID Tokens are not the only security tokens used by OpenID Connect that can be token bound.
 	Browsers implementing token binding can transparently token bind browser cookies.
-	The <xref target="OAuth.TokenBinding">OAuth 2.0 Token Binding</xref> specification
+	The <xref target="I-D.ietf-oauth-token-binding">OAuth 2.0 Token Binding</xref> specification
 	defines mechanisms for token binding of access tokens, refresh tokens, and authorization codes.
 	There are demonstrable security benefits to using token binding to transform
 	all of these tokens that were originally bearer tokens
@@ -457,8 +457,8 @@
 	<t>
 	  This specification registers the following metadata definition
 	  in the IANA "OAuth Authorization Server Metadata" registry
-	  <!-- <xref target="IANA.OAuth.Parameters"/> TBD Uncomment once registry has been established -->
-	  established by <xref target="OAuth.AuthorizationMetadata"/>:
+	   <xref target="IANA.OAuth.Parameters"/> TBD Uncomment once registry has been established
+	  established by <xref target="RFC8414"/>:
 	</t>
 
 	<section anchor="DiscContents" title="Registry Contents">
@@ -496,81 +496,14 @@
       <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.6749"?>
       <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7230"?>
       <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7800"?>
+	  <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8414"?> <!-- AS Metadata -->
 
-      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-tokbind-protocol-19.xml' ?>
-      <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-tokbind-https-17.xml' ?>
+	  <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8471"?> <!-- Token Binding Protocol -->
+	  <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.8473"?> <!-- Token Binding over HTTP -->
 
-      <reference anchor="OpenID.Core" target="http://openid.net/specs/openid-connect-core-1_0.html">
-        <front>
-          <title>OpenID Connect Core 1.0</title>
-
-          <author fullname="Nat Sakimura" initials="N." surname="Sakimura">
-            <organization abbrev="NRI">Nomura Research Institute, Ltd.</organization>
-          </author>
-
-          <author fullname="John Bradley" initials="J." surname="Bradley">
-            <organization abbrev="Ping Identity">Ping Identity</organization>
-          </author>
-
-          <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
-            <organization abbrev="Microsoft">Microsoft</organization>
-          </author>
-
-          <author fullname="Breno de Medeiros" initials="B." surname="de Medeiros">
-            <organization abbrev="Google">Google</organization>
-          </author>
-
-	  <author fullname="Chuck Mortimore" initials="C." surname="Mortimore">
-	    <organization abbrev="Salesforce">Salesforce</organization>
-	  </author>
-
-          <date day="8" month="November" year="2014"/>
-        </front>
-      </reference>
-
-      <reference anchor="OpenID.Discovery" target="http://openid.net/specs/openid-connect-discovery-1_0.html">
-        <front>
-          <title>OpenID Connect Discovery 1.0</title>
-
-          <author fullname="Nat Sakimura" initials="N." surname="Sakimura">
-            <organization abbrev="NRI">Nomura Research Institute, Ltd.</organization>
-          </author>
-
-          <author fullname="John Bradley" initials="J." surname="Bradley">
-            <organization abbrev="Ping Identity">Ping Identity</organization>
-          </author>
-
-          <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
-            <organization abbrev="Microsoft">Microsoft</organization>
-          </author>
-
-          <author fullname="Edmund Jay" initials="E." surname="Jay">
-            <organization abbrev="Illumila">Illumila</organization>
-          </author>
-
-          <date day="8" month="November" year="2014"/>
-        </front>
-      </reference>
-
-      <reference anchor="OpenID.Registration" target="http://openid.net/specs/openid-connect-registration-1_0.html">
-        <front>
-          <title>OpenID Connect Dynamic Client Registration 1.0</title>
-
-          <author fullname="Nat Sakimura" initials="N." surname="Sakimura">
-            <organization abbrev="NRI">Nomura Research Institute, Ltd.</organization>
-          </author>
-
-          <author fullname="John Bradley" initials="J." surname="Bradley">
-            <organization abbrev="Ping Identity">Ping Identity</organization>
-          </author>
-
-          <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
-            <organization abbrev="Microsoft">Microsoft</organization>
-          </author>
-
-          <date day="8" month="November" year="2014"/>
-        </front>
-      </reference>
+	  <?rfc include='http://openid.net/bibxml/reference.OpenID.Core.xml' ?>
+	  <?rfc include='http://openid.net/bibxml/reference.OpenID.Discovery.xml' ?>
+	  <?rfc include='https://openid.net/bibxml/reference.OpenID.Registration.xml' ?>
 
       <reference anchor="JWT" target="http://tools.ietf.org/html/rfc7519">
 	<front>
@@ -609,65 +542,13 @@
         <seriesInfo name="FIPS" value="PUB 180-4" />
         <format target="http://csrc.nist.gov/publications/fips/fips180-4/fips-180-4.pdf" type="PDF" />
       </reference>
-
-      <reference anchor="IANA.JWT.Claims" target="http://www.iana.org/assignments/jwt">
-        <front>
-          <title>JSON Web Token Claims</title>
-          <author>
-            <organization>IANA</organization>
-          </author>
-	  <date/>
-        </front>
-      </reference>
-
-      <reference anchor="IANA.OAuth.Parameters" target="http://www.iana.org/assignments/oauth-parameters">
-        <front>
-          <title>OAuth Parameters</title>
-          <author>
-            <organization>IANA</organization>
-          </author>
-	  <date/>
-        </front>
-      </reference>
-
     </references>
 
     <references title="Informative References">
       <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7517"?>
       <?rfc include="http://xml2rfc.tools.ietf.org/public/rfc/bibxml/reference.RFC.7591"?>
 
-      <reference anchor="OAuth.AuthorizationMetadata" target="http://tools.ietf.org/html/draft-ietf-oauth-discovery-10">
-        <front>
-	  <title abbrev="OAuth 2.0 Authorization Server Metadata">OAuth 2.0 Authorization Server Metadata</title>
-
-	  <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
-	    <organization abbrev="Microsoft">Microsoft</organization>
-	    <address>
-	      <email>mbj@microsoft.com</email>
-	      <uri>http://self-issued.info/</uri>
-	    </address>
-	  </author>
-
-	  <author fullname="Nat Sakimura" initials="N." surname="Sakimura">
-	    <organization abbrev="NRI">Nomura Research Institute, Ltd.</organization>
-	    <address>
-	      <email>n-sakimura@nri.co.jp</email>
-	      <uri>http://nat.sakimura.org/</uri>
-	    </address>
-	  </author>
-
-	  <author fullname="John Bradley" initials="J." surname="Bradley">
-	    <organization abbrev="Ping Identity">Ping Identity</organization>
-	    <address>
-	      <email>ve7jtb@ve7jtb.com</email>
-	      <uri>http://www.thread-safe.com/</uri>
-	    </address>
-	  </author>
-
-	  <date day="10" month="March" year="2017" />
-        </front>
-	<seriesInfo name="Internet-Draft" value="draft-ietf-oauth-discovery-10"/>
-      </reference>
+	  <?rfc include='http://xml2rfc.tools.ietf.org/public/rfc/bibxml3/reference.I-D.draft-ietf-oauth-token-binding-08.xml' ?>
 
       <reference anchor="OAuth.Post" target="http://openid.net/specs/oauth-v2-form-post-response-mode-1_0.html">
         <front>
@@ -685,55 +566,28 @@
         </front>
       </reference>
 
-      <reference anchor="OAuth.TokenBinding" target="https://tools.ietf.org/html/draft-ietf-oauth-token-binding-07">
-	<front>
-	  <title abbrev="OAuth 2.0 Token Binding">OAuth 2.0 Token Binding</title>
+		<reference anchor="IANA.JWT.Claims" target="http://www.iana.org/assignments/jwt">
+			<front>
+				<title>JSON Web Token Claims</title>
+				<author>
+					<organization>IANA</organization>
+				</author>
+				<date/>
+			</front>
+		</reference>
 
-	  <author fullname="Michael B. Jones" initials="M.B." surname="Jones">
-	    <organization abbrev="Microsoft">Microsoft</organization>
-	    <address>
-	      <email>mbj@microsoft.com</email>
-	      <uri>http://self-issued.info/</uri>
-	    </address>
-	  </author>
+		<reference anchor="IANA.OAuth.Parameters" target="http://www.iana.org/assignments/oauth-parameters">
+			<front>
+				<title>OAuth Parameters</title>
+				<author>
+					<organization>IANA</organization>
+				</author>
+				<date/>
+			</front>
+		</reference>
 
-    <author fullname="Brian Campbell" initials="B." surname="Campbell">
-      <organization>Ping Identity</organization>
-      <address>
-        <email>brian.d.campbell@gmail.com</email>
-        <uri>https://twitter.com/__b_c</uri>
-      </address>
-    </author>
+	</references>
 
-	  <author fullname="John Bradley" initials="J." surname="Bradley">
-	    <organization>Yubico</organization>
-	    <address>
-	      <email>ve7jtb@ve7jtb.com</email>
-	      <uri>http://www.thread-safe.com/</uri>
-	    </address>
-	  </author>
-
-	  <author fullname="William Denniss" initials="W." surname="Denniss">
-	    <organization>Google</organization>
-	    <address>
-	      <postal>
-		<street>1600 Amphitheatre Pkwy</street>
-		<city>Mountain View</city>
-		<region>CA</region>
-		<code>94043</code>
-		<country>USA</country>
-	      </postal>
-	      <email>wdenniss@google.com</email>
-	      <uri>http://wdenniss.com/</uri>
-	    </address>
-	  </author>
-
-	  <date day="26" month="October" year="2017" />
-	</front>
-	<seriesInfo name="Internet-Draft" value="draft-ietf-oauth-token-binding-07"/>
-      </reference>
-
-    </references>
     <section anchor="Examples" title="Token Bound Authentication Examples">
       <t>
         Examples of token bound OpenID Connect authentication flows are provided in this
@@ -1330,9 +1184,11 @@
 <t>
 	-04
 	<list style="symbols">
-		<t>
 
-		</t>
+	<t>Update the references to the core token binding specs, which are now RFCs 8471, 8472, and 8473.</t>
+	<t>Update reference to AS metadata, which is now RFC 8414.</t>
+	<t>Update the draft-ietf-oauth-token-binding reference to -08.</t>
+
 	</list>
 </t>
 
